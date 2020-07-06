@@ -34,9 +34,9 @@ public class UserController {
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO) {
-        return CustomerDTO.getInstance(customerService
-                .save(Customer.getInstance(customerDTO),
-                        customerDTO.getPetIds()));
+        Customer savedCustomer =
+                customerService.save(Customer.getInstance(customerDTO));
+        return CustomerDTO.getInstance(savedCustomer);
     }
 
     @GetMapping("/customer")
@@ -67,7 +67,7 @@ public class UserController {
 
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeRequestDTO) {
-        List<Employee> employees = employeeService.getEmployeesBySuitability(employeeRequestDTO.getDate(), employeeRequestDTO.getSkills());
+        List<Employee> employees = employeeService.findEmployeesForService(employeeRequestDTO.getDate(), employeeRequestDTO.getSkills());
         return employees.stream().map(EmployeeDTO::getInstance).collect(Collectors.toList());
     }
 

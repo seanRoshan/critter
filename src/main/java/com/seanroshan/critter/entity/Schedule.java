@@ -4,13 +4,12 @@ import com.seanroshan.critter.constants.EmployeeSkill;
 import com.seanroshan.critter.dto.ScheduleDTO;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Schedule implements Serializable {
+public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

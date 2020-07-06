@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-public class Pet implements Serializable {
+public class Pet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

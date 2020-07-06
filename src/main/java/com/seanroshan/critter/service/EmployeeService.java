@@ -2,12 +2,13 @@ package com.seanroshan.critter.service;
 
 import com.seanroshan.critter.constants.EmployeeSkill;
 import com.seanroshan.critter.entity.Employee;
-import com.seanroshan.critter.repository.EmployeeRepository;
+import com.seanroshan.critter.repository.employee.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,20 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
+    public Employee save(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    public void saveEmployeeAvailability(Set<DayOfWeek> daysAvailable, long employeeId) {
+        Optional<Employee> employeeOptional = employeeRepository.findById(employeeId);
+        if (!employeeOptional.isPresent()) {
+            return;
+        }
+        Employee employee = employeeOptional.get();
+        employee.setDaysAvailable(daysAvailable);
+        employeeRepository.save(employee);
+    }
+
     public Employee getById(long employeeId) {
         return employeeRepository.getOne(employeeId);
     }
@@ -28,21 +43,18 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee save(Employee employee) {
-        return employeeRepository.save(employee);
-    }
+    public List<Employee> findEmployeesForService(LocalDate date, Set<EmployeeSkill> skills) {
 
-    public List<Employee> getEmployeesBySuitability(LocalDate date, Set<EmployeeSkill> skills) {
-        return employeeRepository
-                .getAllByDaysAvailableContains(date.getDayOfWeek()).stream()
+        //1. Get the employee that is available on the date
+        int dayOfWeek = date.getDayOfWeek().getValue() - 1;
+        List<Employee> unDutyEmployees = employeeRepository
+                .findEmployeesForService(dayOfWeek);
+
+        //2. filter out unskilled employees
+        return unDutyEmployees.stream()
                 .filter(employee -> employee.getSkills().containsAll(skills))
                 .collect(Collectors.toList());
     }
 
-    public void saveEmployeeAvailability(Set<DayOfWeek> daysAvailable, long employeeId) {
-        Employee employee = employeeRepository.getOne(employeeId);
-        employee.setDaysAvailable(daysAvailable);
-        employeeRepository.save(employee);
-    }
 
 }

@@ -1,4 +1,4 @@
-package com.seanroshan.critter.repository;
+package com.seanroshan.critter.repository.schedule;
 
 import com.seanroshan.critter.entity.Employee;
 import com.seanroshan.critter.entity.Pet;

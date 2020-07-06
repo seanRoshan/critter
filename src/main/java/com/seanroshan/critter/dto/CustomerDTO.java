@@ -58,6 +58,8 @@ public class CustomerDTO {
     }
 
     public static CustomerDTO getInstance(Customer customer) {
+        if (customer == null)
+            return null;
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setId(customer.getId());
         customerDTO.setName(customer.getName());

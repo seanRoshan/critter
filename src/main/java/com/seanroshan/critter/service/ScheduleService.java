@@ -4,10 +4,10 @@ import com.seanroshan.critter.entity.Customer;
 import com.seanroshan.critter.entity.Employee;
 import com.seanroshan.critter.entity.Pet;
 import com.seanroshan.critter.entity.Schedule;
-import com.seanroshan.critter.repository.CustomerRepository;
-import com.seanroshan.critter.repository.EmployeeRepository;
+import com.seanroshan.critter.repository.customer.CustomerRepository;
+import com.seanroshan.critter.repository.employee.EmployeeRepository;
 import com.seanroshan.critter.repository.pet.PetRepository;
-import com.seanroshan.critter.repository.ScheduleRepository;
+import com.seanroshan.critter.repository.schedule.ScheduleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

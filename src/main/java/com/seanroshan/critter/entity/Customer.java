@@ -4,10 +4,11 @@ import com.seanroshan.critter.dto.CustomerDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Customer implements Serializable {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,9 +77,11 @@ public class Customer implements Serializable {
 
     public static Customer getInstance(CustomerDTO customerDTO) {
         Customer customer = new Customer();
+        customer.setId(customerDTO.getId());
         customer.setName(customerDTO.getName());
         customer.setPhoneNumber(customerDTO.getPhoneNumber());
         customer.setNotes(customerDTO.getNotes());
+        customer.setPets(new ArrayList<>());
         return customer;
     }
 

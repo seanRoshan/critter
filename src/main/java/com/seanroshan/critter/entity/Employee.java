@@ -9,7 +9,7 @@ import java.time.DayOfWeek;
 import java.util.Set;
 
 @Entity
-public class Employee implements Serializable {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
