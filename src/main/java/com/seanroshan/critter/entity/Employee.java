@@ -17,9 +17,11 @@ public class Employee implements Serializable {
 
     private String name;
 
+    // Non-entity types so we annotated with @ElementCollection
     @ElementCollection
     private Set<EmployeeSkill> skills;
 
+    // Non-entity types so we annotated with @ElementCollection
     @ElementCollection
     private Set<DayOfWeek> daysAvailable;
 
@@ -57,6 +59,7 @@ public class Employee implements Serializable {
 
     public static Employee getInstance(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
+        employee.setId(employeeDTO.getId());
         employee.setName(employeeDTO.getName());
         employee.setSkills(employeeDTO.getSkills());
         employee.setDaysAvailable(employeeDTO.getDaysAvailable());
