@@ -21,11 +21,11 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public Employee save(Employee employee) {
+    public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
-    public void saveEmployeeAvailability(Set<DayOfWeek> daysAvailable, long employeeId) {
+    public void setAvailability(Set<DayOfWeek> daysAvailable, long employeeId) {
         Optional<Employee> employeeOptional = employeeRepository.findById(employeeId);
         if (!employeeOptional.isPresent()) {
             return;
@@ -35,7 +35,7 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
-    public Employee getById(long employeeId) {
+    public Employee getEmployee(long employeeId) {
         return employeeRepository.getOne(employeeId);
     }
 

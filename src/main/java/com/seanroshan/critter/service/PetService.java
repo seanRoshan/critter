@@ -20,7 +20,7 @@ public class PetService {
         this.customerRepository = customerRepository;
     }
 
-    public Pet saveByCustomerId(Pet pet, long customerId) {
+    public Pet savePet(Pet pet, long customerId) {
 
         // Step 1. Get the customer of the pet with customer id
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
@@ -42,15 +42,15 @@ public class PetService {
         return insertedPet;
     }
 
-    public Optional<Pet> getById(long petId) {
+    public Optional<Pet> getPet(long petId) {
         return petRepository.findById(petId);
     }
 
-    public List<Pet> getList() {
+    public List<Pet> getPets() {
         return petRepository.findAll();
     }
 
-    public List<Pet> getCustomersPets(long customerId) {
+    public List<Pet> getPetsByOwner(long customerId) {
         // Step 1. Get the customer of the pet with customer id
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
         if (!optionalCustomer.isPresent()) {

@@ -35,34 +35,34 @@ public class UserController {
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO) {
         Customer savedCustomer =
-                customerService.save(Customer.getInstance(customerDTO));
+                customerService.saveCustomer(Customer.getInstance(customerDTO));
         return CustomerDTO.getInstance(savedCustomer);
     }
 
     @GetMapping("/customer")
     public List<CustomerDTO> getAllCustomers() {
-        List<Customer> customers = customerService.getList();
+        List<Customer> customers = customerService.getAllCustomers();
         return customers.stream().map(CustomerDTO::getInstance).collect(Collectors.toList());
     }
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId) {
-        return CustomerDTO.getInstance(customerService.getByPetId(petId));
+        return CustomerDTO.getInstance(customerService.getOwnerByPet(petId));
     }
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        return EmployeeDTO.getInstance(employeeService.save(Employee.getInstance(employeeDTO)));
+        return EmployeeDTO.getInstance(employeeService.saveEmployee(Employee.getInstance(employeeDTO)));
     }
 
     @PostMapping("/employee/{employeeId}")
     public EmployeeDTO getEmployee(@PathVariable long employeeId) {
-        return EmployeeDTO.getInstance(employeeService.getById(employeeId));
+        return EmployeeDTO.getInstance(employeeService.getEmployee(employeeId));
     }
 
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
-        employeeService.saveEmployeeAvailability(daysAvailable, employeeId);
+        employeeService.setAvailability(daysAvailable, employeeId);
     }
 
     @GetMapping("/employee/availability")

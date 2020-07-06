@@ -24,14 +24,14 @@ public class ScheduleController {
     @PostMapping
     public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
         return ScheduleDTO.getInstance(scheduleService
-                .save(Schedule.getInstance(scheduleDTO),
+                .createSchedule(Schedule.getInstance(scheduleDTO),
                         scheduleDTO.getEmployeeIds(),
                         scheduleDTO.getPetIds()));
     }
 
     @GetMapping
     public List<ScheduleDTO> getAllSchedules() {
-        List<Schedule> schedules = scheduleService.getList();
+        List<Schedule> schedules = scheduleService.getAllSchedules();
         return schedules
                 .stream()
                 .map(ScheduleDTO::getInstance)
@@ -40,7 +40,7 @@ public class ScheduleController {
 
     @GetMapping("/pet/{petId}")
     public List<ScheduleDTO> getScheduleForPet(@PathVariable long petId) {
-        List<Schedule> schedules = scheduleService.getListByPetId(petId);
+        List<Schedule> schedules = scheduleService.getScheduleForPet(petId);
         return schedules
                 .stream()
                 .map(ScheduleDTO::getInstance)
@@ -49,7 +49,7 @@ public class ScheduleController {
 
     @GetMapping("/employee/{employeeId}")
     public List<ScheduleDTO> getScheduleForEmployee(@PathVariable long employeeId) {
-        List<Schedule> schedules = scheduleService.getListByEmployeeId(employeeId);
+        List<Schedule> schedules = scheduleService.getScheduleForEmployee(employeeId);
         return schedules
                 .stream()
                 .map(ScheduleDTO::getInstance)
@@ -58,7 +58,7 @@ public class ScheduleController {
 
     @GetMapping("/customer/{customerId}")
     public List<ScheduleDTO> getScheduleForCustomer(@PathVariable long customerId) {
-        List<Schedule> schedules = scheduleService.getListByCustomerId(customerId);
+        List<Schedule> schedules = scheduleService.getScheduleForCustomer(customerId);
         return schedules
                 .stream()
                 .map(ScheduleDTO::getInstance)

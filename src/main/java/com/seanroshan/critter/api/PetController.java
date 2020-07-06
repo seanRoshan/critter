@@ -28,25 +28,25 @@ public class PetController {
 
     @PostMapping
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
-        Pet insertedPet = petService.saveByCustomerId(Pet.getInstance(petDTO), petDTO.getOwnerId());
+        Pet insertedPet = petService.savePet(Pet.getInstance(petDTO), petDTO.getOwnerId());
         return PetDTO.getInstance(insertedPet);
     }
 
     @GetMapping("/{petId}")
     public PetDTO getPet(@PathVariable long petId) {
-        Optional<Pet> optionalPet = petService.getById(petId);
+        Optional<Pet> optionalPet = petService.getPet(petId);
         return optionalPet.map(PetDTO::getInstance).orElse(null);
     }
 
     @GetMapping
     public List<PetDTO> getPets() {
-        List<Pet> pets = petService.getList();
+        List<Pet> pets = petService.getPets();
         return pets.stream().map(PetDTO::getInstance).collect(Collectors.toList());
     }
 
     @GetMapping("/owner/{ownerId}")
     public List<PetDTO> getPetsByOwner(@PathVariable long ownerId) {
-        List<Pet> pets = petService.getCustomersPets(ownerId);
+        List<Pet> pets = petService.getPetsByOwner(ownerId);
         return pets.stream().map(PetDTO::getInstance).collect(Collectors.toList());
     }
 }

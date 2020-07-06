@@ -18,15 +18,15 @@ public class CustomerService {
         this.petRepository = petRepository;
     }
 
-    public Customer save(Customer customer) {
+    public Customer saveCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
 
-    public Customer getByPetId(long petId) {
+    public Customer getOwnerByPet(long petId) {
         return petRepository.getOne(petId).getCustomer();
     }
 
-    public List<Customer> getList() {
+    public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
 
