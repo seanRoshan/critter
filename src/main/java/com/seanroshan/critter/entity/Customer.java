@@ -20,6 +20,12 @@ public class Customer implements Serializable {
     private String notes;
 
     @OneToMany(targetEntity = Pet.class)
+    @JoinTable(
+            name = "customer_pet_relationship",
+            joinColumns = {@JoinColumn(name = "customer_id")},
+            inverseJoinColumns = {@JoinColumn(name = "pet_id")}
+    )
+    // Create a table called customer_pet_relationship and link customer_id to zero or more pet_ids
     private List<Pet> pets;
 
     public long getId() {
@@ -62,6 +68,8 @@ public class Customer implements Serializable {
         this.pets = pets;
     }
 
+
+    // Insert a new pet for the customer
     public void addPet(Pet pet) {
         this.pets.add(pet);
     }

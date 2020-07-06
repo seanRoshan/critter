@@ -6,7 +6,7 @@ import com.seanroshan.critter.entity.Pet;
 import com.seanroshan.critter.entity.Schedule;
 import com.seanroshan.critter.repository.CustomerRepository;
 import com.seanroshan.critter.repository.EmployeeRepository;
-import com.seanroshan.critter.repository.PetRepository;
+import com.seanroshan.critter.repository.pet.PetRepository;
 import com.seanroshan.critter.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 

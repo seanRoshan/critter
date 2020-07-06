@@ -6,6 +6,7 @@ import com.seanroshan.critter.service.PetService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -21,14 +22,20 @@ public class PetController {
         this.petService = petService;
     }
 
+
+    // NOTE: This is not the best implementation, the better implementation could be wrapping PetDTO in ResponseEntity
+    // So we can set status for the response based on the input, right now I had to stick with run-time exception
+
     @PostMapping
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
-        return PetDTO.getInstance(petService.saveByCustomerId(Pet.getInstance(petDTO), petDTO.getOwnerId()));
+        Pet insertedPet = petService.saveByCustomerId(Pet.getInstance(petDTO), petDTO.getOwnerId());
+        return PetDTO.getInstance(insertedPet);
     }
 
     @GetMapping("/{petId}")
     public PetDTO getPet(@PathVariable long petId) {
-        return PetDTO.getInstance((petService.getById(petId)));
+        Optional<Pet> optionalPet = petService.getById(petId);
+        return optionalPet.map(PetDTO::getInstance).orElse(null);
     }
 
     @GetMapping
@@ -39,7 +46,7 @@ public class PetController {
 
     @GetMapping("/owner/{ownerId}")
     public List<PetDTO> getPetsByOwner(@PathVariable long ownerId) {
-        List<Pet> pets = petService.getListByCustomerId(ownerId);
+        List<Pet> pets = petService.getCustomersPets(ownerId);
         return pets.stream().map(PetDTO::getInstance).collect(Collectors.toList());
     }
 }

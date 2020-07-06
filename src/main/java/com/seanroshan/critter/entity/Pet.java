@@ -18,6 +18,8 @@ public class Pet implements Serializable {
 
     private String name;
 
+    // Multiple pets can be owned by a single customer
+    // A Pet must have an owner (customer)
     @ManyToOne(targetEntity = Customer.class, optional = false)
     private Customer customer;
 

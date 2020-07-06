@@ -3,7 +3,7 @@ package com.seanroshan.critter.service;
 import com.seanroshan.critter.entity.Customer;
 import com.seanroshan.critter.entity.Pet;
 import com.seanroshan.critter.repository.CustomerRepository;
-import com.seanroshan.critter.repository.PetRepository;
+import com.seanroshan.critter.repository.pet.PetRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
