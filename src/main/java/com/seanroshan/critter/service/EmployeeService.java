@@ -5,6 +5,7 @@ import com.seanroshan.critter.entity.Employee;
 import com.seanroshan.critter.repository.employee.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
@@ -12,7 +13,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
 @Service
+@Transactional()
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;

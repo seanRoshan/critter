@@ -5,13 +5,17 @@ import com.seanroshan.critter.repository.customer.CustomerRepository;
 import com.seanroshan.critter.repository.pet.PetRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+
 @Service
+@Transactional()
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final PetRepository petRepository;
+
 
     public CustomerService(CustomerRepository customerRepository, PetRepository petRepository) {
         this.customerRepository = customerRepository;
@@ -29,8 +33,6 @@ public class CustomerService {
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
-
-
 
 
 }

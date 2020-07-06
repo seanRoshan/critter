@@ -8,9 +8,11 @@ import com.seanroshan.critter.repository.pet.PetRepository;
 import com.seanroshan.critter.repository.schedule.ScheduleRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional()
 public class ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
